@@ -5,7 +5,7 @@ app = Flask(__name__)
 #first page (MAIN PAGE Intro)
 @app.route("/")
 def hello_world():
-    return render_template('base.html')
+    return render_template('home.html')
 
 @app.route("/about")
 def about():
@@ -23,8 +23,10 @@ def input():
         for value in expenses1: 
             total_fixed +=  float(value)
         fix_num = (0.5*float(salary))/total_fixed
+
         #FLEX EXPENSES
         expenses2 =request.form.getlist('field2[]')
+        print(expenses2)
         total_flex = 0
         for value in expenses2: 
             total_flex +=  float(value)
@@ -35,6 +37,7 @@ def input():
         for value in expenses3: 
             total_save +=  float(value)
         save_num = (0.2*float(salary))/total_save
+
         labels = [
             'Fixed Income',
             'Flexable Spending',
@@ -139,3 +142,7 @@ def input():
         )
     else:
         return render_template("fixed.html")
+
+@app.route("/goal")
+def goal():
+    return render_template('goal.html')

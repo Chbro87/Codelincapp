@@ -20,6 +20,10 @@
 </style>
 </head>
 <body>
+    {% extends "base.html" %}
+{% block title %}Home Page{% endblock %}
+{% block content %}
+<h1> Budget Calculator </h1>
 <div style="width:85%;padding:50px;">
     {% if message %}
         <div class="alert alert-success">{{message}}</div>
@@ -40,7 +44,7 @@
                 <td>
                 <div class="input-wrapper1">
                      <br/>
-                        <input type="text" name="field1[]" value=""/>
+                        <input id="fixedExpense" type="text" name="field1[]" value=""/>
                         <br/>
                         </div>
                     </div>
@@ -49,17 +53,17 @@
                 <td>
                 <div class="input-wrapper2">
                 <br/>
-                    <input type="text" name="field2[]" value=""/>
+                    <input id="flexExpense" type="text" name="field2[]" value=""/>
                     <br/>
                     </div>
                 </div>
-                <a href="javascript:void(0);" class="add-input2" title="Add input"><p>add</p></a>
+                <span class="add-input2" title="Add input"><p>add</p></span>
                 </td>
                 <td>
 
                 <div class="input-wrapper3">
                   <br/>
-                    <input type="text" name="field3[]" value=""/>
+                    <input id="saveExpense" type="text" name="field3[]" value=""/>
                     <br/>
                     </div>
                 </div>
@@ -67,28 +71,44 @@
                 </td>
             </tr>
         </table>
-        <input type="submit" name="cmdsubmit">
+        <input id="submit" type="submit" name="cmdsubmit">
     </form>
 </div> 
-<script>
+<script>   
 $(document).ready(function(){
+    // alert('document is being run from this script tag')
     var max_input_fields = 10;
     var add_input = $('.add-input1');
     var input_wrapper = $('.input-wrapper1');
     var new_input = '<div><input type="text" name="field1[]" value=""/><a href="javascript:void(0);" class="remove-input" title="Remove input"><p>remove</p></a></div>';
     var add_input_count = 1; 
+    $('#submit').click(function(){
+        console.log('---------------', $('#fixedExpense').val());
+        var budjetCalc = {
+            fixedExpenses: [],
+            flexExpenses: [],
+            saveExpenses: []
+        };
+        budjetCalc.fixedExpenses.push($('#fixedExpense').val());
+        budjetCalc.flexExpenses.push($('#flexExpense').val());
+        budjetCalc.saveExpenses.push($('#saveExpense').val());
+        window.sessionStorage.setItem('budjetCalcData', JSON.stringify(budjetCalc));
+    });
     $(add_input).click(function(){
+        // alert('well')
         if(add_input_count < max_input_fields){
-        add_input_count++; 
-        $(input_wrapper).append(new_input); 
+            add_input_count++; 
+            $(input_wrapper).append(new_input); 
         }
     });
     $(input_wrapper).on('click', '.remove-input', function(e){
+        // alert('line 94')
         e.preventDefault();
+        
         $(this).parent('div').remove();
         add_input_count--;
     });
-
+    
     var max_input_fields2 = 10;
     var add_input2 = $('.add-input2');
     var input_wrapper2 = $('.input-wrapper2');
@@ -96,8 +116,8 @@ $(document).ready(function(){
     var add_input_count2 = 1; 
     $(add_input2).click(function(){
         if(add_input_count2 < max_input_fields2){
-        add_input_count2++; 
-        $(input_wrapper2).append(new_input2); 
+            add_input_count2++; 
+            $(input_wrapper2).append(new_input2); 
         }
     });
     $(input_wrapper2).on('click', '.remove-input', function(e){
@@ -105,8 +125,8 @@ $(document).ready(function(){
         $(this).parent('div').remove();
         add_input_count2--;
     });
-
-
+    
+    
     var max_input_fields3 = 10;
     var add_input3 = $('.add-input3');
     var input_wrapper3 = $('.input-wrapper3');
@@ -114,8 +134,8 @@ $(document).ready(function(){
     var add_input_count3 = 1; 
     $(add_input3).click(function(){
         if(add_input_count3 < max_input_fields3){
-        add_input_count3++; 
-        $(input_wrapper3).append(new_input3); 
+            add_input_count3++; 
+            $(input_wrapper3).append(new_input3); 
         }
     });
     $(input_wrapper3).on('click', '.remove-input', function(e){
@@ -127,6 +147,7 @@ $(document).ready(function(){
 
 
 </script>
+{% endblock %}
 </body>
 </html>
 
