@@ -80,3 +80,7 @@ def input():
         )
     else:
         return render_template("fixed.html")
+
+@app.route("/goal")
+def goal():
+    return render_template('goal.html')
