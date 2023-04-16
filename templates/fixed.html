@@ -28,12 +28,11 @@
     {% if message %}
         <div class="alert alert-success">{{message}}</div>
     {% endif %}
+      <!--- Monthly Salary Input -->
     <form method="POST">
-        <label for="salary-type">Choose a salary type:</label>
-        <select type="salary-types" id="salary-types">
-            <option value="Weekly">Weekly</option>
-            <option value="Biweekly">Biweekly</option>
-        </select>
+        <label for="salary-type">Enter Monthly Salary:</label>
+        <input name="salary" placeholder="salary">
+        <input type="submit">
         <table>
             <tr>
                 <th><div> Fixed Expenses :</div></th>
