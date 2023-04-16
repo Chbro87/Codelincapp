@@ -1,0 +1,133 @@
+
+<html>
+<head>
+<title>Add Remove Input Fields Dynamically with Python Flask jQuery and PostgreSQL Database</title>  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<style>
+.input-wrapper div {
+    margin-bottom: 10px;
+}
+.remove-input {
+    margin-top: 10px;
+    margin-left: 15px;
+    vertical-align: text-bottom;
+}
+.add-input {
+    margin-top: 10px;
+    margin-left: 10px;
+    vertical-align: text-bottom;
+}
+</style>
+</head>
+<body>
+<div style="width:85%;padding:50px;">
+    {% if message %}
+        <div class="alert alert-success">{{message}}</div>
+    {% endif %}
+    <form method="POST">
+        <label for="salary-type">Choose a salary type:</label>
+        <select type="salary-types" id="salary-types">
+            <option value="Weekly">Weekly</option>
+            <option value="Biweekly">Biweekly</option>
+        </select>
+        <table>
+            <tr>
+                <th><div> Fixed Expenses :</div></th>
+                <th><div>Flex Expenses :</div></th>
+                <th><div>Save Expenses :</div></th>
+                
+            </tr>
+
+                <td>
+                <div class="input-wrapper1">
+                     <br/>
+                        <input type="text" name="field1[]" value=""/>
+                        <br/>
+                        </div>
+                    </div>
+                    <a href="javascript:void(0);" class="add-input1" title="Add input"><p>add</p></a>
+                </td>
+                <td>
+                <div class="input-wrapper2">
+                <br/>
+                    <input type="text" name="field2[]" value=""/>
+                    <br/>
+                    </div>
+                </div>
+                <a href="javascript:void(0);" class="add-input2" title="Add input"><p>add</p></a>
+                </td>
+                <td>
+
+                <div class="input-wrapper3">
+                  <br/>
+                    <input type="text" name="field3[]" value=""/>
+                    <br/>
+                    </div>
+                </div>
+                <a href="javascript:void(0);" class="add-input3" title="Add input"><p>add</p></a>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" name="cmdsubmit">
+    </form>
+</div> 
+<script>
+$(document).ready(function(){
+    var max_input_fields = 10;
+    var add_input = $('.add-input1');
+    var input_wrapper = $('.input-wrapper1');
+    var new_input = '<div><input type="text" name="field1[]" value=""/><a href="javascript:void(0);" class="remove-input" title="Remove input"><p>remove</p></a></div>';
+    var add_input_count = 1; 
+    $(add_input).click(function(){
+        if(add_input_count < max_input_fields){
+        add_input_count++; 
+        $(input_wrapper).append(new_input); 
+        }
+    });
+    $(input_wrapper).on('click', '.remove-input', function(e){
+        e.preventDefault();
+        $(this).parent('div').remove();
+        add_input_count--;
+    });
+
+    var max_input_fields2 = 10;
+    var add_input2 = $('.add-input2');
+    var input_wrapper2 = $('.input-wrapper2');
+    var new_input2 = '<div><input type="text" name="field2[]" value=""/><a href="javascript:void(0);" class="remove-input" title="Remove input"><p>remove</p></a></div>';
+    var add_input_count2 = 1; 
+    $(add_input2).click(function(){
+        if(add_input_count2 < max_input_fields2){
+        add_input_count2++; 
+        $(input_wrapper2).append(new_input2); 
+        }
+    });
+    $(input_wrapper2).on('click', '.remove-input', function(e){
+        e.preventDefault();
+        $(this).parent('div').remove();
+        add_input_count2--;
+    });
+
+
+    var max_input_fields3 = 10;
+    var add_input3 = $('.add-input3');
+    var input_wrapper3 = $('.input-wrapper3');
+    var new_input3 = '<div><input type="text" name="field3[]" value=""/><a href="javascript:void(0);" class="remove-input" title="Remove input"><p>remove</p></a></div>';
+    var add_input_count3 = 1; 
+    $(add_input3).click(function(){
+        if(add_input_count3 < max_input_fields3){
+        add_input_count3++; 
+        $(input_wrapper3).append(new_input3); 
+        }
+    });
+    $(input_wrapper3).on('click', '.remove-input', function(e){
+        e.preventDefault();
+        $(this).parent('div').remove();
+        add_input_count3--;
+    });
+});
+
+
+</script>
+</body>
+</html>
+
