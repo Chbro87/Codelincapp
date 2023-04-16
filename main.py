@@ -5,7 +5,7 @@ app = Flask(__name__)
 #first page (MAIN PAGE Intro)
 @app.route("/")
 def hello_world():
-    return render_template('base.html')
+    return render_template('home.html')
 
 @app.route("/about")
 def about():
@@ -19,23 +19,28 @@ def input():
         #FIXED EXPENSES 
         expenses1 =request.form.getlist('field1[]')
         total_fixed = 0
-        for value in expenses1: 
-            total_fixed +=  float(value)
-            print(value)
+        for value in expenses1:
+            if value != "":
+
+                total_fixed +=  float(value)
+                print(value)
         print(total_fixed)
         #FLEX EXPENSES
         expenses2 =request.form.getlist('field2[]')
+        print(expenses2)
         total_flex = 0
         for value in expenses2: 
-            total_flex +=  float(value)
-            print(value)
+            if value != "":
+                total_flex +=  float(value)
+                print(value)
         print(total_flex)
         #SAVE EXPENSES
         expenses3 =request.form.getlist('field3[]')
         total_save = 0
-        for value in expenses3: 
-            total_save +=  float(value)
-            print(value)
+        for value in expenses3:
+            if value != "":
+                total_save +=  float(value)
+                print(value)
         print(total_save)
         labels = [
             'Fixed Income',
